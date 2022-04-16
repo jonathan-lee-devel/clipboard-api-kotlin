@@ -1,5 +1,6 @@
 package io.jonathanlee.clipboardapi.controller
 
+import io.jonathanlee.clipboardapi.service.SecureRandomService
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
@@ -12,14 +13,16 @@ import java.time.ZonedDateTime
 
 @RestController
 @RequestMapping("/")
-class IndexController {
+class IndexController(
+    private val secureRandomService: SecureRandomService
+) {
 
     private val log: Logger = LoggerFactory.getLogger(IndexController::class.java)
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
     fun getIndex(): ResponseEntity<ZonedDateTime> {
-        log.info("Testing logger")
+        log.info("Secure random: ${this.secureRandomService.generateSecureRandomString(12)}")
         return ResponseEntity.ok(ZonedDateTime.now())
     }
 
