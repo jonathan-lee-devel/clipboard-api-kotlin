@@ -11,18 +11,7 @@ class SecurityConfig: WebSecurityConfigurerAdapter() {
         http
             ?.authorizeRequests()
             ?.anyRequest()
-            ?.authenticated()
-            ?.and()
-            ?.formLogin()
-            ?.loginPage("http://localhost:4200/login")?.permitAll()
-            ?.loginProcessingUrl("/api/login")
-            ?.and()
-            ?.logout()
             ?.permitAll()
-            ?.logoutUrl("/api/logout")
-            ?.and()
-            ?.csrf()
-            ?.disable()
     }
 
 }
