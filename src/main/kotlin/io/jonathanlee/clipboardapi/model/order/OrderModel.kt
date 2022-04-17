@@ -5,6 +5,11 @@ import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.ManyToOne
 
+/**
+ * Entity used to represent an order placed by a customer.
+ *
+ * @author Jonathan Lee <jonthan.lee.devel@gmail.com>
+ */
 @Entity
 data class OrderModel(
     @Id private val id: Long,
