@@ -2,7 +2,6 @@ package io.jonathanlee.clipboardapi.controller.customer
 
 import io.jonathanlee.clipboardapi.dto.customer.CustomerDto
 import io.jonathanlee.clipboardapi.service.customer.CustomerService
-import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
@@ -22,7 +21,7 @@ class CustomerController(
     /**
      * Basic logger.
      */
-    private val log: Logger = LoggerFactory.getLogger(CustomerController::class.java)
+    private val log = LoggerFactory.getLogger(CustomerController::class.java)
 
     /**
      * @param customerDto customer data wrapped in customer DTO
