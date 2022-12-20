@@ -13,14 +13,14 @@ import org.springframework.security.core.userdetails.UserDetails
 data class ApplicationUser(
     @field:Id @field:Field("_id") val objectId: ObjectId,
     val id: String,
-    private val username: String,
+    val email: String,
     private val password: String,
     val firstName: String,
     val lastName: String,
     val enabled: Boolean,
     @field:DBRef val registrationVerificationToken: RegistrationVerificationToken,
     @field:DBRef val passwordResetToken: PasswordResetToken,
-): UserDetails {
+) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
         return AuthorityUtils.NO_AUTHORITIES
     }
@@ -30,7 +30,7 @@ data class ApplicationUser(
     }
 
     override fun getUsername(): String {
-        return this.username
+        return this.email
     }
 
     override fun isAccountNonExpired(): Boolean {
