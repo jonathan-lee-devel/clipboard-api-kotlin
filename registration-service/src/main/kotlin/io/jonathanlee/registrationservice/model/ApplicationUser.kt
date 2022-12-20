@@ -13,8 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails
 data class ApplicationUser(
     @field:Id @field:Field("_id") val objectId: ObjectId,
     val id: String,
-    val username: String,
-    val password: String,
+    private val username: String,
+    private val password: String,
     val firstName: String,
     val lastName: String,
     val enabled: Boolean,
