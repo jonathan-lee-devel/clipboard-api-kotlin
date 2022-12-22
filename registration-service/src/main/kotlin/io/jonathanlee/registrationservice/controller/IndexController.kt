@@ -1,5 +1,6 @@
 package io.jonathanlee.registrationservice.controller
 
+import io.jonathanlee.registrationservice.dto.RegistrationDto
 import io.jonathanlee.registrationservice.model.ApplicationUser
 import io.jonathanlee.registrationservice.model.PasswordResetToken
 import io.jonathanlee.registrationservice.model.RegistrationVerificationToken
@@ -11,10 +12,9 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.security.crypto.password.PasswordEncoder
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import java.time.Instant
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/")
@@ -28,6 +28,13 @@ class IndexController(
     @GetMapping
     fun getIndex(): ResponseEntity<Instant> {
         return ResponseEntity.status(HttpStatus.OK).body(Instant.now())
+    }
+
+    @PostMapping("/validation")
+    fun testValidation(
+        @Valid @RequestBody registrationDto: RegistrationDto
+    ): ResponseEntity<RegistrationDto> {
+        return ResponseEntity.status(HttpStatus.OK).body(registrationDto)
     }
 
     @GetMapping("/demo", produces = [MediaType.APPLICATION_JSON_VALUE])
