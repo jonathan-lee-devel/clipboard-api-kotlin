@@ -7,4 +7,6 @@ interface RegistrationService {
 
     fun registerNewUser(registrationDto: RegistrationDto): RegistrationStatusDto
 
+    fun confirmNewUserRegistration(tokenValue: String): RegistrationStatusDto
+
 }

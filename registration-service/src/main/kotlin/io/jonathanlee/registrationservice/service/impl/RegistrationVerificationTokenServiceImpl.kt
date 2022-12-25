@@ -6,6 +6,7 @@ import io.jonathanlee.registrationservice.service.RandomService
 import io.jonathanlee.registrationservice.service.RegistrationVerificationTokenService
 import org.bson.types.ObjectId
 import org.springframework.stereotype.Service
+import java.time.Instant
 import java.time.ZonedDateTime
 
 @Service
@@ -28,4 +29,14 @@ class RegistrationVerificationTokenServiceImpl(
             )
         )
     }
+
+    override fun findTokenByValue(tokenValue: String): RegistrationVerificationToken? {
+        return this.registrationVerificationTokenRepository.findByValue(tokenValue)
+    }
+
+    override fun expireToken(registrationVerificationToken: RegistrationVerificationToken) {
+        registrationVerificationToken.expiryDate = Instant.now()
+        this.registrationVerificationTokenRepository.save(registrationVerificationToken)
+    }
+
 }

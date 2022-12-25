@@ -11,5 +11,5 @@ data class RegistrationVerificationToken(
     @field:Id @field:Field("_id") val objectId: ObjectId,
     val id: String,
     val value: String,
-    val expiryDate: Instant,
+    var expiryDate: Instant,
 )

@@ -17,7 +17,7 @@ data class ApplicationUser(
     private val password: String,
     val firstName: String,
     val lastName: String,
-    val enabled: Boolean,
+    var enabled: Boolean,
     @field:DBRef val registrationVerificationToken: RegistrationVerificationToken,
     @field:DBRef val passwordResetToken: PasswordResetToken,
 ) : UserDetails {

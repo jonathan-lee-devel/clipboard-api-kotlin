@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository
 interface RegistrationVerificationTokenRepository :
     MongoRepository<RegistrationVerificationToken, ObjectId> {
 
-    fun findByValue(value: String)
+    fun findByValue(value: String): RegistrationVerificationToken?
 
 }

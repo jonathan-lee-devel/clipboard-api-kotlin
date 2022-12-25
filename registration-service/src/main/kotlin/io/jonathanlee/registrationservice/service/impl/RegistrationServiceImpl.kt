@@ -8,6 +8,7 @@ import io.jonathanlee.registrationservice.service.*
 import org.bson.types.ObjectId
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.time.Instant
 
 @Service
 class RegistrationServiceImpl(
@@ -38,6 +39,26 @@ class RegistrationServiceImpl(
         val savedApplicationUser = this.applicationUserService.persistApplicationUser(newApplicationUser)
         if (newApplicationUser.id == savedApplicationUser.id) {// If save was successful
             return RegistrationStatusDto(RegistrationStatus.AWAITING_EMAIL_VERIFICATION)
+        }
+
+        return RegistrationStatusDto(RegistrationStatus.FAILURE)
+    }
+
+    override fun confirmNewUserRegistration(tokenValue: String): RegistrationStatusDto {
+        val registrationVerificationToken = this.registrationVerificationTokenService.findTokenByValue(tokenValue)
+        if (registrationVerificationToken === null) {
+            return RegistrationStatusDto(RegistrationStatus.INVALID_TOKEN)
+        }
+
+        if (!registrationVerificationToken.expiryDate.isBefore(Instant.now())) {
+            val userToEnable = this.applicationUserService.findByRegistrationVerificationToken(registrationVerificationToken)
+            val updatedUser = this.applicationUserService.enableUser(userToEnable)
+            this.registrationVerificationTokenService.expireToken(registrationVerificationToken)
+            if (updatedUser.enabled) {
+                return RegistrationStatusDto(RegistrationStatus.SUCCESS)
+            }
+        } else {
+            return RegistrationStatusDto(RegistrationStatus.EMAIL_VERIFICATION_EXPIRED)
         }
 
         return RegistrationStatusDto(RegistrationStatus.FAILURE)
