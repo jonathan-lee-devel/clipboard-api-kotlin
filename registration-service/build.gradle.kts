@@ -23,6 +23,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("javax.validation:validation-api:2.0.1.Final")
     implementation("org.hibernate.validator:hibernate-validator:8.0.0.Final")
+    implementation("org.apache.commons:commons-lang3:3.12.0")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

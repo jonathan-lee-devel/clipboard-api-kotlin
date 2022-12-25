@@ -11,7 +11,10 @@ data class RegistrationDto(
         min = Constraints.MIN_NAME_LENGTH,
         max = Constraints.MAX_NAME_LENGTH
     ) val firstName: String,
-    @field:NotNull val lastName: String,
+    @field:NotNull @field:Size(
+        min = Constraints.MIN_NAME_LENGTH,
+        max = Constraints.MAX_NAME_LENGTH
+    ) val lastName: String,
     @field:NotNull @field:Size(
         min = Constraints.MIN_PASSWORD_LENGTH,
         max = Constraints.MAX_PASSWORD_LENGTH
